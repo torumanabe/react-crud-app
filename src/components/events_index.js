@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { readEvents } from "../actions";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn
-} from "material-ui/Table"
+  TableRowColumn,
+} from "material-ui/Table";
 
-import FloatingActionButton from "material-ui/FloatingActionButton"
-import ContentAdd from "material-ui/svg-icons/content/add"
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
 
 class EventsIndex extends Component {
   componentDidMount() {
@@ -24,10 +24,8 @@ class EventsIndex extends Component {
       <TableRow key={event.id}>
         <TableRowColumn>{event.id}</TableRowColumn>
         <TableRowColumn>
-          <Link to={`/events/${event.id}`}>
-            {event.title}
-          </Link>
-          </TableRowColumn>
+          <Link to={`/events/${event.id}`}>{event.title}</Link>
+        </TableRowColumn>
         <TableRowColumn>{event.body}</TableRowColumn>
       </TableRow>
     ));
@@ -35,38 +33,38 @@ class EventsIndex extends Component {
 
   render() {
     const style = {
-        position: "fixed",
-        right: 12,
-        bottom: 12
-      }
+      position: "fixed",
+      right: 12,
+      bottom: 12,
+    };
 
     return (
       <React.Fragment>
-        <FloatingActionButton style={style} containerElement={<Link to ="/events/new"/>}>
-          <ContentAdd/>
+        <FloatingActionButton
+          style={style}
+          containerElement={<Link to="/events/new" />}
+        >
+          <ContentAdd />
         </FloatingActionButton>
 
-      <Table>
-        <TableHeader
-        displaySelectAll={false}
-        adjustForCheckBox={false}
-        >
-          <TableRow>
-            <TableHeaderColumn>ID</TableHeaderColumn>
-            <TableHeaderColumn>Title</TableHeaderColumn>
-            <TableHeaderColumn>Body</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
+        <Table>
+          <TableHeader displaySelectAll={false} adjustForCheckBox={false}>
+            <TableRow>
+              <TableHeaderColumn>ID</TableHeaderColumn>
+              <TableHeaderColumn>Title</TableHeaderColumn>
+              <TableHeaderColumn>Body</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
 
-        <TableBody displayRowCheckbox={false}>
-          {this.renderEvents()}
-        </TableBody>
-      </Table>
+          <TableBody displayRowCheckbox={false}>
+            {this.renderEvents()}
+          </TableBody>
+        </Table>
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({ events: state.events });
+const mapStateToProps = (state) => ({ events: state.events });
 const MapDispatchToProps = { readEvents };
 export default connect(mapStateToProps, MapDispatchToProps)(EventsIndex);
